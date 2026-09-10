@@ -88,11 +88,7 @@ function App() {
         <p className="subtitle">Extract numbers, open WhatsApp</p>
       </header>
 
-      <div className="plate textarea-plate">
-        <span className="crosshair crosshair--tl" aria-hidden="true" />
-        <span className="crosshair crosshair--tr" aria-hidden="true" />
-        <span className="crosshair crosshair--bl" aria-hidden="true" />
-        <span className="crosshair crosshair--br" aria-hidden="true" />
+      <div className="textarea-wrap">
         <label htmlFor="input" className="sr-only">
           Paste teks atau ketik nomor telepon
         </label>
@@ -143,7 +139,7 @@ function App() {
 
       {numbers.length > 0 && (
         <div className="results">
-          <p className="results-label mono">
+          <p className="results-label">
             {numbers.length === 1
               ? '1 nomor terdeteksi'
               : `${numbers.length} nomor terdeteksi`}
@@ -175,7 +171,7 @@ function App() {
       )}
 
       <div className="cta-area">
-        <div className="hairline" aria-hidden="true" />
+        <div className="cta-divider" aria-hidden="true" />
         <button
           type="button"
           className="cta"
@@ -186,14 +182,14 @@ function App() {
           Buka WhatsApp
         </button>
         {ctaDisabled && ctaReason && (
-          <p id="cta-reason" className="cta-reason mono">
+          <p id="cta-reason" className="cta-reason">
             {ctaReason}
           </p>
         )}
       </div>
 
       <footer className="footer">
-        <span className="mono">100% client-side. No data leaves your device.</span>
+        <span>100% client-side. No data leaves your device.</span>
       </footer>
     </div>
   )
