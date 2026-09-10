@@ -1,263 +1,237 @@
 ---
-name: WA Number Extractor
-description: Extract phone numbers from text and open WhatsApp chats instantly
+name: Wise-Inspired
 colors:
-  surface: '#f9f9ff'
-  surface-dim: '#d3daea'
-  surface-bright: '#f9f9ff'
+  surface: '#ffffff'
+  surface-dim: '#f7f7f8'
+  surface-bright: '#ffffff'
   surface-container-lowest: '#ffffff'
-  surface-container-low: '#f0f3ff'
-  surface-container: '#e7eefe'
-  surface-container-high: '#e2e8f8'
-  surface-container-highest: '#dce3f2'
-  on-surface: '#151c27'
-  on-surface-variant: '#41493a'
-  inverse-surface: '#2a313c'
-  inverse-on-surface: '#ebf1ff'
-  outline: '#717a68'
-  outline-variant: '#c1cab5'
-  surface-tint: '#2f6c00'
-  primary: '#2f6c00'
-  on-primary: '#111827'
-  primary-container: '#b6f58c'
-  on-primary-container: '#0b2000'
-  inverse-primary: '#91d963'
-  secondary: '#575e70'
+  surface-container-low: '#fafafa'
+  surface-container: '#f5f5f5'
+  surface-container-high: '#eeeeee'
+  surface-container-highest: '#e5e5e5'
+  on-surface: '#1a1a2e'
+  on-surface-variant: '#5e6278'
+  inverse-surface: '#1a3324'
+  inverse-on-surface: '#ffffff'
+  outline: '#d1d5db'
+  outline-variant: '#e5e7eb'
+  surface-tint: '#9fe870'
+  primary: '#9fe870'
+  on-primary: '#1a3324'
+  primary-container: 'rgba(159, 232, 112, 0.12)'
+  on-primary-container: '#0d5c1a'
+  inverse-primary: '#7cc94d'
+  secondary: '#5e6278'
   on-secondary: '#ffffff'
-  secondary-container: '#d9dff5'
-  on-secondary-container: '#5c6274'
-  tertiary: '#575e70'
+  secondary-container: '#f0f1f5'
+  on-secondary-container: '#3a3d4e'
+  tertiary: '#f59e0b'
   on-tertiary: '#ffffff'
-  tertiary-container: '#ced4e9'
-  on-tertiary-container: '#545b6d'
-  error: '#ba1a1a'
+  tertiary-container: '#fef3c7'
+  on-tertiary-container: '#92400e'
+  error: '#ef4444'
   on-error: '#ffffff'
-  error-container: '#ffdad6'
-  on-error-container: '#93000a'
-  background: '#f9f9ff'
-  on-background: '#151c27'
-  surface-variant: '#dce3f2'
-  primary-dim: '#86d455'
-  surface-canvas: '#f9f9fb'
-  surface-card: '#ffffff'
-  surface-subtle: '#f2f3f3'
-  border-subtle: 'rgba(17, 24, 39, 0.08)'
-  border-strong: 'rgba(17, 24, 39, 0.16)'
-  text-primary: '#111827'
-  text-muted: '#6b7280'
+  error-container: '#fef2f2'
+  on-error-container: '#991b1b'
+  text-primary: '#1a1a2e'
+  text-secondary: '#5e6278'
+  text-tertiary: '#9ca3af'
+  accent-green: '#9fe870'
+  nav-bg: '#1a3324'
+  nav-text: '#ffffff'
+  border: '#e5e7eb'
+  border-focus: '#9fe870'
+  shadow-sm: '0 1px 3px rgba(0,0,0,0.06)'
+  shadow-md: '0 4px 16px rgba(0,0,0,0.08)'
+  shadow-lg: '0 8px 32px rgba(0,0,0,0.12)'
+  shadow-xl: '0 16px 48px rgba(0,0,0,0.16)'
 typography:
-  display-lg:
-    fontFamily: Inter
-    fontSize: 3rem
-    fontWeight: '700'
-    lineHeight: '1.15'
+  display-hero:
+    fontFamily: Plus Jakarta Sans
+    fontSize: 52px
+    fontWeight: '800'
+    lineHeight: 1.1
     letterSpacing: -0.03em
-  display-lg-mobile:
-    fontFamily: Inter
-    fontSize: 2.25rem
+  display-hero-mobile:
+    fontFamily: Plus Jakarta Sans
+    fontSize: 36px
+    fontWeight: '800'
+    lineHeight: 1.15
+    letterSpacing: -0.025em
+  headline-xl:
+    fontFamily: Plus Jakarta Sans
+    fontSize: 40px
     fontWeight: '700'
-    lineHeight: '1.2'
+    lineHeight: 1.2
     letterSpacing: -0.025em
   headline-lg:
-    fontFamily: Inter
-    fontSize: 2rem
+    fontFamily: Plus Jakarta Sans
+    fontSize: 28px
     fontWeight: '700'
-    lineHeight: '1.25'
+    lineHeight: 1.3
     letterSpacing: -0.02em
-  headline-lg-mobile:
-    fontFamily: Inter
-    fontSize: 1.5rem
+  headline-sm:
+    fontFamily: Plus Jakarta Sans
+    fontSize: 20px
     fontWeight: '600'
-    lineHeight: '1.3'
-    letterSpacing: -0.015em
-  headline-md:
-    fontFamily: Inter
-    fontSize: 1.25rem
-    fontWeight: '600'
-    lineHeight: '1.4'
+    lineHeight: 1.4
     letterSpacing: -0.01em
   body-lg:
-    fontFamily: Inter
-    fontSize: 1.125rem
+    fontFamily: Plus Jakarta Sans
+    fontSize: 18px
     fontWeight: '400'
-    lineHeight: '1.6'
+    lineHeight: 1.6
     letterSpacing: -0.005em
   body-md:
-    fontFamily: Inter
-    fontSize: 1rem
+    fontFamily: Plus Jakarta Sans
+    fontSize: 16px
     fontWeight: '400'
-    lineHeight: '1.5'
+    lineHeight: 1.5
     letterSpacing: 0em
   body-sm:
-    fontFamily: Inter
-    fontSize: 0.875rem
+    fontFamily: Plus Jakarta Sans
+    fontSize: 14px
     fontWeight: '400'
-    lineHeight: '1.45'
-    letterSpacing: 0em
+    lineHeight: 1.5
+    letterSpacing: 0.005em
   label-md:
-    fontFamily: Inter
-    fontSize: 0.875rem
+    fontFamily: Plus Jakarta Sans
+    fontSize: 14px
     fontWeight: '600'
-    lineHeight: '1.25'
+    lineHeight: 1.4
     letterSpacing: 0.01em
   label-sm:
-    fontFamily: Inter
-    fontSize: 0.75rem
+    fontFamily: Plus Jakarta Sans
+    fontSize: 12px
     fontWeight: '600'
-    lineHeight: '1.2'
+    lineHeight: 1.3
     letterSpacing: 0.02em
 rounded:
-  sm: 0.25rem
-  DEFAULT: 0.5rem
-  md: 0.75rem
+  sm: 0.5rem
+  DEFAULT: 0.75rem
+  md: 1rem
   lg: 1rem
   xl: 1.5rem
   full: 9999px
 spacing:
-  space-2xs: 0.25rem
+  space-xxs: 0.25rem
   space-xs: 0.5rem
   space-sm: 0.75rem
   space-md: 1rem
   space-lg: 1.5rem
   space-xl: 2rem
   space-2xl: 3rem
-  container-max-w: 680px
-  gutter-mobile: 1rem
-  gutter-desktop: 1.5rem
+  space-3xl: 4rem
+  space-4xl: 6rem
+  container-max: 1120px
+  gutter-desktop: 2rem
+  gutter-mobile: 1.25rem
 ---
 
-# Design System: WA Number Extractor
+## Brand & Style
 
-## Overview
+This design system channels Wise's fintech authority into a lightweight utility — a dark green navigation bar that signals trust, a bright green accent that drives action, and a converter-widget hero that puts the tool front and center. The aesthetic fuses **Fintech Trust** with **Utility Clarity**:
 
-**Creative North Star: "The Electric Utility"**
-
-A high-contrast digital minimal system built for anonymous communication and private interactions. The aesthetic prioritizes absolute visual clarity, reduced friction, and hyper-focused content hierarchy. Superfluous chrome is eliminated in favor of clean structure, intentional whitespace, and razor-sharp typographic discipline. The electric neon lime accent (#9FE870) acts as a visual beacon, injecting vitality while deep ink neutrals maintain pristine readability.
-
-**Key Characteristics:**
-- Single typeface (Inter) across all roles — no decorative fonts
-- Electric accent on primary actions only — rarity earns attention
-- Soft surface transitions with ambient shadows — no harsh borders
-- Rounded corners (0.75rem–1rem) for modern ergonomic feel
-- 8-point spatial system with centered 680px content stream
+- A deep green (`#1a3324`) navigation bar establishes credibility and calm authority.
+- A bright electric green (`#9fe870`) powers CTAs, active states, and focus — the action color.
+- Clean white surfaces with generous whitespace keep the tool approachable and scannable.
+- Subtle shadows and rounded controls create depth without visual noise.
 
 ## Colors
 
-The palette centers on high-visibility electric neon lime anchored by deep ink neutrals.
+The color system operates on a light foundation with a dark header establishing trust.
 
-### Primary
-- **Electric Lime** (#2f6c00): Primary brand accent. Used for CTA buttons, selected states, active indicators, and focus halos. Reserved for ≤15% of any screen — its rarity is the point.
-- **Primary Dim** (#86d455): Hover state for primary elements. Deeper, more grounded lime.
-- **Primary Container** (#b6f58c): Tinted background for selected items and active regions.
-
-### Secondary
-- **Slate** (#575E70): Secondary structural elements, muted badges, inactive states.
-- **Secondary Container** (#d9dff5): Background for secondary chips and tags.
-
-### Neutral
-- **On Surface** (#151c27): Primary text, headings, dark buttons. Never pure black.
-- **Text Muted** (#6B7280): Secondary copy, placeholders, timestamps.
-- **Surface Canvas** (#f9f9fb): Global base canvas. Mitigates eye strain.
-- **Surface Card** (#ffffff): Elevated containers — cards, sheets, popovers.
-- **Surface Subtle** (#f2f3F3): Hover backgrounds, subtle differentiation.
-
-### Error
-- **Error** (#ba1a1a): Destructive actions, error states.
-- **Error Container** (#ffdad6): Error banner backgrounds.
-- **On Error Container** (#93000a): Error text on container backgrounds.
-
-### Named Rules
-
-**The Electric Accent Rule.** The primary lime (#9FE870 / #2f6c00) appears on ≤15% of any given screen. Its rarity is the point — it signals action, selection, and verification, not decoration.
-
-**The Deep Ink Rule.** All text uses #111827 or #151c27, never pure black (#000000). The slight warmth maintains readability without harshness.
+- **Primary (`#9fe870`)**: The sole accent. Used for primary CTAs, active selection states, and focus rings. Bright, energetic, impossible to miss.
+- **Navigation (`#1a3324`)**: Deep green header and footer. White text on dark green signals professionalism and security — the fintech register.
+- **Neutral Surface Hierarchy**: `#ffffff` (page background), `#f7f7f8` (subtle variation), `#f5f5f5` (cards and containers). Clean, minimal, breathing room as design.
+- **Text Contrast**: Primary text at `#1a1a2e` for immediate readability, secondary at `#5e6278` for supporting content, tertiary at `#9ca3af` for minimal labels.
 
 ## Typography
 
-**Display Font:** Inter (system-ui fallback)
-**Body Font:** Inter (system-ui fallback)
+The typographic system uses **Plus Jakarta Sans** — a modern geometric sans with sharp character and excellent legibility at all sizes.
 
-**Character:** Unmatched clarity, neutral geometry, and crisp legibility across high-density mobile interfaces. A single typeface eliminates visual friction from font switching.
+- **Hero Display**: Extra-bold weight at 52px with tight tracking creates a commanding, confident entrance.
+- **Headlines**: Bold weights with negative tracking for crisp, editorial presence.
+- **Body**: Regular weights with comfortable 1.6 line height for effortless reading.
+- **Labels**: Semibold weights with subtle tracking for clean, scannable metadata.
 
-### Hierarchy
-- **Display** (700, 3rem/1.15, tracking -0.03em): Hero headlines on desktop. Tight negative tracking for decisive structure.
-- **Display Mobile** (700, 2.25rem/1.2, tracking -0.025em): Headlines on small viewports. Proportional scale without awkward wraps.
-- **Headline LG** (700, 2rem/1.25, tracking -0.02em): Section headings.
-- **Headline MD** (600, 1.25rem/1.4, tracking -0.01em): Subsection headings.
-- **Body LG** (400, 1.125rem/1.6, tracking -0.005em): Primary reading text. Open line-height for friction-free reading.
-- **Body MD** (400, 1rem/1.5): Standard body text.
-- **Label MD** (600, 0.875rem/1.25, tracking +0.01em): Buttons, badges, interactive text.
-- **Label SM** (600, 0.75rem/1.2, tracking +0.02em): Timestamps, microcopy, chips.
+## Layout & Spacing
 
-### Named Rules
+Layout geometry prioritizes breathing room and centered focus.
 
-**The Single Face Rule.** Inter is the only typeface. Labels use weight 600, not a separate mono font. Display uses weight 700 with tight tracking. No decorative, script, or display-only faces.
-
-## Layout
-
-8-point spatial system with 4px half-steps for fine alignment. Single-column centered content stream optimized for mobile-first composition.
-
-- **Container max-width:** 680px — keeps reading lines comfortable
-- **Mobile (< 640px):** Edge-to-edge, 1rem (16px) side gutters
-- **Desktop (≥ 640px):** Floating card stack, 1.5rem (24px) side gutters
-- **Header margin-bottom:** 3rem
-- **Section margin-top:** 1.5rem
-- **Row padding:** 0.75rem 1rem
+- **Container**: Max-width `1120px` centered — generous but focused.
+- **Desktop (≥768px)**: Centered content with generous section spacing (4rem–6rem).
+- **Mobile (<768px)**: Full-width with 1.25rem gutters, maintaining 48px minimum touch targets.
+- **Spacing rhythm**: 8px base unit with generous gaps between sections.
 
 ## Elevation & Depth
 
-Depth is established through soft surface transitions, whisper-quiet borders, and ambient diffusion rather than harsh drop shadows.
+Depth comes from soft shadows and clean surfaces — never harsh borders.
 
-- **Canvas (Level 0):** #f9f9fb global backdrop
-- **Cards (Level 1):** #ffffff with `1px solid rgba(17, 24, 39, 0.08)` and `box-shadow: 0 1px 3px 0 rgba(17, 24, 39, 0.04), 0 1px 2px -1px rgba(17, 24, 39, 0.03)`
-- **Overlays (Level 2):** Enhanced separation with `box-shadow: 0 10px 25px -5px rgba(17, 24, 39, 0.08), 0 8px 10px -6px rgba(17, 24, 39, 0.04)`
-- **Focus Rings:** Double ring — `2px solid #111827` boundary offset by `2px solid #9FE870` luminous halo
-
-### Named Rules
-
-**The Flat-By-Default Rule.** Surfaces are flat at rest. Shadows appear only on elevated containers (cards, sheets). No gratuitous shadows on buttons or inline elements.
+1. **Page Surface (`#ffffff`)**: The ground plane, clean and open.
+2. **Card Layer**: Elevated with `box-shadow: 0 4px 16px rgba(0,0,0,0.08)` and subtle 1px borders.
+3. **Hero Card**: Deeper shadow with `box-shadow: 0 8px 32px rgba(0,0,0,0.12)` for emphasis.
+4. **Focus State**: Green glow via `box-shadow: 0 0 0 3px rgba(159, 232, 112, 0.3)`.
 
 ## Shapes
 
-Roundedness level 2 creates a contemporary, welcoming feel that balances structural precision with tactile softness.
+Soft, consistent rounding with no sharp edges:
 
-- **Buttons & Inputs:** 0.75rem (12px) radius — modern ergonomic tap surfaces
-- **Cards & Containers:** 1rem (16px) radius — friendly definition to content blocks
-- **Pills & Chips:** Full radius (9999px) — category tags, verification badges
-- **Banners:** 0.75rem (12px) radius — consistent with interactive elements
+- **Interactive Controls (Buttons, Inputs)**: `12px` (0.75rem).
+- **Cards & Containers**: `16px` (1rem).
+- **Pills & Badges**: Fully rounded (`9999px`).
+- **All radii harmonious**: No mixed radii within a single component.
 
 ## Components
 
-### Buttons
-- **Primary Brand:** Solid #2f6c00 background, #111827 text (Inter 600). Never white text on primary. Hover deepens to #86d455. Radius 0.75rem.
-- **Subtle / Ghost:** Transparent background, 1px border-subtle, text-muted. Hover shifts to border-strong with surface-subtle background. Radius 0.75rem.
+### Navigation Bar
+- Deep green (`#1a3324`) background, full-width, sticky.
+- White text, logo + wordmark left, minimal nav right.
+- Height `64px` on desktop, `56px` on mobile.
 
-### Input Fields & Textareas
-- **Text Field:** White background, 1px border-subtle, 0.75rem radius. Focus replaces border with 2px on-surface stroke and primary glow shadow.
-- **Multi-line:** 44px min-height, 1rem padding, placeholder in text-muted.
+### Primary Button
+- Solid `#9fe870` background, `#1a3324` text, 700 weight.
+- Height `52px`, full-width on mobile, `16px` radius.
+- Hover: brightness decrease with subtle green shadow.
+- Active: scale `0.98`.
+- Disabled: `0.5` opacity, `not-allowed` cursor.
 
-### Chips & Badges
-- **Active Chip:** Primary-container background, primary text (label-sm), full pill radius.
-- **Neutral Chip:** Surface-subtle background, secondary text, full pill radius.
+### Secondary / Ghost Button
+- Transparent background, `#5e6278` text.
+- Hover: `rgba(0,0,0,0.04)` background, `#1a1a2e` text.
+- Same height and radius as primary.
+
+### Input Fields
+- White surface, `#e5e7eb` border, `12px` radius.
+- Height `auto` for textarea (min 160px).
+- Focus: `#9fe870` border with green glow ring.
+- Placeholder: `#9ca3af`.
 
 ### Cards
-- White fill, 1rem radius, 1px border-subtle, Level 1 elevation. Internal padding 0.75rem 1rem.
+- White surface, `16px` radius, soft shadow.
+- Subtle 1px border for definition.
+- Padding `24px` on desktop, `16px` on mobile.
 
-### Result Rows
-- Hairline top border on each row. Radio-dot: 18px circle, 2px border-strong, fills with primary when active. Selected row: primary-container background, 3px primary left border.
+### Results List
+- Inside the hero card, each row is a button.
+- Selected: green left border, subtle green background tint.
+- Hover: subtle gray background.
 
-## Do's and Don'ts
+### Feature Cards
+- White background, `16px` radius, subtle shadow.
+- Icon circle with green accent, title, description.
+- 3-column grid on desktop, stacked on mobile.
 
-### Do:
-- **Do** use Inter for all text — labels included. Weight 600 replaces mono.
-- **Do** reserve lime accent for actions and selection only.
-- **Do** use soft shadows on cards and elevated containers.
-- **Do** maintain 0.75rem minimum radius on interactive elements.
-- **Do** use the double focus ring (2px ink + 2px primary halo).
+### Trust Badge
+- Pill-shaped (`9999px` radius), green background with dark text.
+- Small, lightweight, reassuring.
+- SVG icon + text.
 
-### Don't:
-- **Don't** use white text on the primary lime button — always #111827.
-- **Don't** add shadows to buttons or inline elements.
-- **Don't** use pure black (#000000) for text — use #111827 or #151c27.
-- **Don't** exceed 15% screen coverage with the primary accent.
-- **Don't** mix typefaces — Inter is the only font.
+### Banner / Alert
+- Rounded, soft background matching type (error: red tint, warning: amber tint, info: gray tint).
+- Icon + message, no harsh borders.
+
+### Footer
+- Deep green background, white text.
+- Organized columns with links.
+- Privacy message prominently displayed.
