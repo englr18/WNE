@@ -1,4 +1,4 @@
-const PHONE_REGEX = /(?:\+?\d{1,4}[\s-]?)?(?:\(?\d{1,5}\)?[\s-]?)?\d{1,5}[\s-]?\d{1,5}[\s-]?\d{0,5}/g;
+const PHONE_REGEX = /[+]?\d[\d\s\-()]{6,}\b/g;
 
 const CLEAN_REGEX = /[^\d+]/g;
 
@@ -29,10 +29,13 @@ function normalizeToE164(raw: string): string | null {
 }
 
 function formatReadable(e164: string): string {
-  if (e164.startsWith('+628') || e164.startsWith('+62')) {
+  if (e164.startsWith('+62')) {
     const local = e164.slice(3);
-    if (local.length >= 9) {
+    if (local.startsWith('8') && local.length >= 9) {
       return `+62 ${local.slice(0, 3)}-${local.slice(3, 7)}-${local.slice(7)}`;
+    }
+    if (!local.startsWith('8') && local.length >= 9) {
+      return `+62 ${local.slice(0, 2)}-${local.slice(2, 6)}-${local.slice(6)}`;
     }
     return e164;
   }

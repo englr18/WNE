@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from 'react'
+import { useState, useCallback, useRef, useMemo } from 'react'
 import { extractNumbers } from './lib/extract'
 import './App.css'
 
@@ -7,6 +7,11 @@ type BannerType = 'error' | 'warning' | 'info'
 interface Banner {
   type: BannerType
   message: string
+}
+
+function hasShortDigitSequences(text: string): boolean {
+  const shortDigitRegex = /\b\d{7}\b/g;
+  return shortDigitRegex.test(text);
 }
 
 function getBannerForInput(
@@ -19,7 +24,10 @@ function getBannerForInput(
   }
   if (!text.trim()) return null
   if (count === 0) {
-    return { type: 'warning', message: 'Tidak ada nomor telepon terdeteksi. Periksa kembali input Anda.' }
+    if (hasShortDigitSequences(text)) {
+      return { type: 'info', message: 'Nomor 7 digit terdeteksi. Untuk nomor telepon rumah, sertakan kode area (contoh: 021-555-1234).' }
+    }
+    return { type: 'warning', message: 'Tidak ada nomor telepon terdeteksi. Coba paste teks yang memuat nomor dengan format Indonesia (08xx) atau internasional (+xx).' }
   }
   return null
 }
@@ -30,7 +38,7 @@ function App() {
   const [clipboardError, setClipboardError] = useState(false)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
-  const numbers = extractNumbers(input)
+  const numbers = useMemo(() => extractNumbers(input), [input])
   const banner = getBannerForInput(input, numbers.length, clipboardError)
   const selected = numbers.find((n) => n.e164 === selectedE164) ?? null
 
@@ -74,30 +82,30 @@ function App() {
 
   const ctaDisabled = !selected
   const ctaReason = !input.trim()
-    ? 'Belum ada nomor valid terdeteksi'
+    ? 'Belum ada nomor terdeteksi'
     : numbers.length > 1 && !selected
       ? 'Pilih nomor dari daftar'
       : numbers.length === 0
-        ? 'Tidak ada nomor valid terdeteksi'
+        ? 'Tidak ada nomor terdeteksi'
         : ''
 
   return (
     <div className="app">
       <header className="header">
         <h1 className="title">WA Number Extractor</h1>
-        <p className="subtitle">Extract numbers, open WhatsApp</p>
+        <p className="subtitle">Tempel teks, ekstrak nomor, langsung chat WhatsApp</p>
       </header>
 
       <div className="textarea-wrap">
         <label htmlFor="input" className="sr-only">
-          Paste teks atau ketik nomor telepon
+          Tempel teks atau ketik nomor telepon
         </label>
         <textarea
           ref={textareaRef}
           id="input"
           className="textarea"
           inputMode="tel"
-          placeholder="Paste teks yang berisi nomor telepon di sini, atau ketik nomor manual..."
+          placeholder="Tempel teks berisi nomor telepon, atau ketik nomor langsung..."
           value={input}
           onChange={(e) => {
             setInput(e.target.value)
@@ -111,9 +119,9 @@ function App() {
             type="button"
             className="btn-ghost"
             onClick={handlePaste}
-            aria-label="Paste dari clipboard"
+            aria-label="Tempel dari clipboard"
           >
-            Paste
+            Tempel
           </button>
           {input && (
             <button
@@ -122,7 +130,7 @@ function App() {
               onClick={handleClear}
               aria-label="Hapus input"
             >
-              Clear
+              Hapus
             </button>
           )}
         </div>
@@ -141,8 +149,8 @@ function App() {
         <div className="results">
           <p className="results-label">
             {numbers.length === 1
-              ? '1 nomor terdeteksi'
-              : `${numbers.length} nomor terdeteksi`}
+              ? '1 nomor ditemukan'
+              : `${numbers.length} nomor ditemukan`}
           </p>
           <ul className="results-list" role="radiogroup" aria-label="Pilih nomor telepon">
             {numbers.map((num, i) => {
