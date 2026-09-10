@@ -1,0 +1,17 @@
+{
+  "name": "WA Number Extractor",
+  "short_name": "WNE",
+  "description": "Extract phone numbers from text and open WhatsApp chats instantly.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f5f4f6",
+  "theme_color": "#f5f4f6",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

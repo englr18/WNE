@@ -1,121 +1,201 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
+import { useState, useCallback, useRef } from 'react'
+import { extractNumbers } from './lib/extract'
 import './App.css'
 
+type BannerType = 'error' | 'warning' | 'info'
+
+interface Banner {
+  type: BannerType
+  message: string
+}
+
+function getBannerForInput(
+  text: string,
+  count: number,
+  clipboardError: boolean
+): Banner | null {
+  if (clipboardError) {
+    return { type: 'error', message: 'Clipboard tidak dapat diakses. Paste atau ketik nomor secara manual.' }
+  }
+  if (!text.trim()) return null
+  if (count === 0) {
+    return { type: 'warning', message: 'Tidak ada nomor telepon terdeteksi. Periksa kembali input Anda.' }
+  }
+  return null
+}
+
 function App() {
-  const [count, setCount] = useState(0)
+  const [input, setInput] = useState('')
+  const [selectedE164, setSelectedE164] = useState<string | null>(null)
+  const [clipboardError, setClipboardError] = useState(false)
+  const textareaRef = useRef<HTMLTextAreaElement>(null)
+
+  const numbers = extractNumbers(input)
+  const banner = getBannerForInput(input, numbers.length, clipboardError)
+  const selected = numbers.find((n) => n.e164 === selectedE164) ?? null
+
+  const handlePaste = useCallback(async () => {
+    setClipboardError(false)
+    try {
+      const text = await navigator.clipboard.readText()
+      setInput(text)
+      setSelectedE164(null)
+    } catch {
+      setClipboardError(true)
+    }
+  }, [])
+
+  const handleClear = useCallback(() => {
+    setInput('')
+    setSelectedE164(null)
+    setClipboardError(false)
+    textareaRef.current?.focus()
+  }, [])
+
+  const handleSelect = useCallback((e164: string) => {
+    setSelectedE164((prev) => (prev === e164 ? null : e164))
+  }, [])
+
+  const handleOpenWhatsApp = useCallback(() => {
+    if (selectedE164) {
+      window.open(`https://wa.me/${selectedE164}`, '_blank')
+    }
+  }, [selectedE164])
+
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (e.key === 'Enter' && selectedE164 && !e.shiftKey) {
+        e.preventDefault()
+        window.open(`https://wa.me/${selectedE164}`, '_blank')
+      }
+    },
+    [selectedE164]
+  )
+
+  const ctaDisabled = !selected
+  const ctaReason = !input.trim()
+    ? 'Belum ada nomor valid terdeteksi'
+    : numbers.length > 1 && !selected
+      ? 'Pilih nomor dari daftar'
+      : numbers.length === 0
+        ? 'Tidak ada nomor valid terdeteksi'
+        : ''
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
+    <div className="app">
+      <header className="header">
+        <h1 className="title">WA Number Extractor</h1>
+        <p className="subtitle">Extract numbers, open WhatsApp</p>
+      </header>
+
+      <div className="plate textarea-plate">
+        <span className="crosshair crosshair--tl" aria-hidden="true" />
+        <span className="crosshair crosshair--tr" aria-hidden="true" />
+        <span className="crosshair crosshair--bl" aria-hidden="true" />
+        <span className="crosshair crosshair--br" aria-hidden="true" />
+        <label htmlFor="input" className="sr-only">
+          Paste teks atau ketik nomor telepon
+        </label>
+        <textarea
+          ref={textareaRef}
+          id="input"
+          className="textarea"
+          inputMode="tel"
+          placeholder="Paste teks yang berisi nomor telepon di sini, atau ketik nomor manual..."
+          value={input}
+          onChange={(e) => {
+            setInput(e.target.value)
+            setSelectedE164(null)
+          }}
+          onKeyDown={handleKeyDown}
+          rows={6}
+        />
+        <div className="textarea-actions">
+          <button
+            type="button"
+            className="btn-ghost"
+            onClick={handlePaste}
+            aria-label="Paste dari clipboard"
+          >
+            Paste
+          </button>
+          {input && (
+            <button
+              type="button"
+              className="btn-ghost"
+              onClick={handleClear}
+              aria-label="Hapus input"
+            >
+              Clear
+            </button>
+          )}
         </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
+      </div>
+
+      {banner && (
+        <div className={`banner banner--${banner.type}`} role="alert">
+          <span className="banner-icon" aria-hidden="true">
+            {banner.type === 'error' ? '!' : banner.type === 'warning' ? '!' : 'i'}
+          </span>
+          {banner.message}
+        </div>
+      )}
+
+      {numbers.length > 0 && (
+        <div className="results">
+          <p className="results-label mono">
+            {numbers.length === 1
+              ? '1 nomor terdeteksi'
+              : `${numbers.length} nomor terdeteksi`}
           </p>
+          <ul className="results-list" role="radiogroup" aria-label="Pilih nomor telepon">
+            {numbers.map((num, i) => {
+              const isSelected = selected?.e164 === num.e164
+              return (
+                <li
+                  key={num.e164}
+                  className={`result-row ${isSelected ? 'result-row--selected' : ''}`}
+                >
+                  <button
+                    type="button"
+                    className="result-btn"
+                    role="radio"
+                    aria-checked={isSelected}
+                    onClick={() => handleSelect(num.e164)}
+                  >
+                    <span className={`radio-dot ${isSelected ? 'radio-dot--active' : ''}`} />
+                    <span className="result-number">{num.readable}</span>
+                    <span className="result-index mono">{String(i + 1).padStart(2, '0')}</span>
+                  </button>
+                </li>
+              )
+            })}
+          </ul>
         </div>
+      )}
+
+      <div className="cta-area">
+        <div className="hairline" aria-hidden="true" />
         <button
           type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
+          className="cta"
+          disabled={ctaDisabled}
+          onClick={handleOpenWhatsApp}
+          aria-describedby={ctaDisabled ? 'cta-reason' : undefined}
         >
-          Count is {count}
+          Buka WhatsApp
         </button>
-      </section>
+        {ctaDisabled && ctaReason && (
+          <p id="cta-reason" className="cta-reason mono">
+            {ctaReason}
+          </p>
+        )}
+      </div>
 
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+      <footer className="footer">
+        <span className="mono">100% client-side. No data leaves your device.</span>
+      </footer>
+    </div>
   )
 }
 
